@@ -1,0 +1,1 @@
+安装nodejs-websocket，使用node把服务运行起来，然后运行html文件即可调用webSocket服务
