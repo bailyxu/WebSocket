@@ -3,16 +3,20 @@
 <head>
     <meta charset="utf-8">
     <title>WebSocket</title>
-
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
          function WebSocketTest(){
             let ws = new WebSocket("ws://localhost:8001");
             ws.onopen = function() {
               console.log("client：打开连接");
-              ws.send("client：hello，服务端");
+              var str = "client：发送到发服务端：hello server"
+              ws.send(str);
+              $("#d1").html(str)
             };
             ws.onmessage = function(e) {
-              console.log("client：接收到服务端的消息 " + e.data);
+              var rep = "client：接收到服务端的消息： " + e.data
+              console.log(rep);
+              $("#d2").html(rep)
               setTimeout(() => {
                 ws.close();
               }, 5000);
@@ -24,10 +28,10 @@
       </script>
 </head>
 <body>
-
-<div id="sse">
-    <a href="javascript:WebSocketTest()">运行 WebSocket</a>
-</div>
-
+    <div id="sse">
+        <a href="javascript:WebSocketTest()">运行 WebSocket</a>
+        <div style="height:40px;line-height:40px" id="d1"></div>
+        <div style="height:30px" id="d2"></div>
+    </div>
 </body>
 </html>
